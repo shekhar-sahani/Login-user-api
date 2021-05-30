@@ -21,7 +21,6 @@ const Login = (props) => {
           <label>Email</label>
           <input
             type="text"
-            autoFocus
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}

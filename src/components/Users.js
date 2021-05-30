@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const Users = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
 
@@ -35,44 +36,49 @@ const Users = ({ handleLogout }) => {
       <h2 className="users">ALL USERS</h2>
       {users.map((curElem) => {
         return (
-          <div key={curElem.id} className="box">
-            <div className="box-1">
-              <div className="col-sm-6">
-                <div className="col-md-8">
-                  <div className="card mb-3">
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0"> Name: </h6>
+          <div key={curElem.id}>
+            <div className="box">
+              <div className="box-1">
+                <div className="col-sm-6">
+                  <div className="col-md-8">
+                    <div className="card mb-3">
+                      <div className="card-body">
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <h6 className="mb-0"> Name: </h6>
+                          </div>
+                          <div className="col-sm-9 text-secondary">
+                            {curElem.name}
+                          </div>
                         </div>
-                        <div className="col-sm-9 text-secondary">
-                          {curElem.name}
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <h6 className="mb-0">Email:</h6>
+                          </div>
+                          <div className="col-sm-9 text-secondary">
+                            {curElem.email}
+                          </div>
                         </div>
-                      </div>
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">Email:</h6>
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-3">
+                            <h6 className="mb-0">Phone:</h6>
+                          </div>
+                          <div className="col-sm-9 text-secondary">
+                            {curElem.phone}
+                          </div>
                         </div>
-                        <div className="col-sm-9 text-secondary">
-                          {curElem.email}
-                        </div>
-                      </div>
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-3">
-                          <h6 className="mb-0">Phone:</h6>
-                        </div>
-                        <div className="col-sm-9 text-secondary">
-                          {curElem.phone}
-                        </div>
-                      </div>
-                      <hr />
-                      <div className="row">
-                        <div className="col-sm-12">
-                          <a className="btn btn-info" href="user-details">
-                            Details
-                          </a>
+                        <hr />
+                        <div className="row">
+                          <div className="col-sm-12">
+                            <Link
+                              className="btn btn-info"
+                              to={"/user-details/" + curElem.id}
+                            >
+                              Details
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

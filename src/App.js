@@ -80,8 +80,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
-      {/* <Route path="/users" component={Users} />
+    <Router>
+      <div className="App">
+        {/* <Route path="/users" component={Users} />
         <Route path="/user-details" component={UsersDetails} />
         <Route path="/">
           <Login
@@ -97,23 +98,33 @@ const App = () => {
             passwordError={passwordError}
           />
         </Route> */}
-      {user ? (
-        <Users handleLogout={handleLogout} />
-      ) : (
-        <Login
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-          handleSignUp={handleSignUp}
-          hasAccount={hasAccount}
-          setHasAccount={setHasAccount}
-          emailError={emailError}
-          passwordError={passwordError}
-        />
-      )}
-    </div>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <>
+              {user ? (
+                <Users handleLogout={handleLogout} />
+              ) : (
+                <Login
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
+                  handleLogin={handleLogin}
+                  handleSignUp={handleSignUp}
+                  hasAccount={hasAccount}
+                  setHasAccount={setHasAccount}
+                  emailError={emailError}
+                  passwordError={passwordError}
+                />
+              )}
+            </>
+          )}
+        ></Route>
+        <Route path="/user-details/:id" component={UsersDetails}></Route>
+      </div>
+    </Router>
   );
 };
 

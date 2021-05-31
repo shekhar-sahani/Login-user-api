@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import fire from "firebase";
 const UsersDetails = (props) => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState("");
 
   useEffect(() => {
     axios
@@ -17,6 +16,9 @@ const UsersDetails = (props) => {
         console.log(err);
       });
   }, []);
+  if (!users) {
+    return <div></div>;
+  }
 
   return (
     <>
@@ -88,7 +90,6 @@ const UsersDetails = (props) => {
                       className="nav-link active"
                       id="home-tab"
                       data-toggle="tab"
-                      href="#home"
                       role="tab"
                       aria-controls="home"
                       aria-selected="true"
@@ -175,7 +176,21 @@ const UsersDetails = (props) => {
                       <label>Address</label>
                     </div>
                     <div className="col-md-6">
-                      <p>Address Section </p>
+                      <p>
+                        {users.address.street}, {users.address.zipcode},{" "}
+                        {users.address.city}{" "}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label>Company</label>
+                    </div>
+                    <div className="col-md-6">
+                      <p>
+                        {users.company.name}, {users.company.catchPhrase},{" "}
+                        {users.company.bs}{" "}
+                      </p>
                     </div>
                   </div>
                 </div>

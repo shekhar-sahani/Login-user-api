@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Heart from "@material-ui/icons/Favorite";
 import { Link } from "react-router-dom";
 const Users = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     axios
@@ -15,16 +17,16 @@ const Users = ({ handleLogout }) => {
         console.log(err);
       });
   }, []);
-  //   const getUsers = async () => {
-  //     const response = await fetch(
-  //       "https://jsonplaceholder.typicode.com/users"
-  //     );
-  //     console.log(response);
-  //     setUsers(response.json());
-  //   };
 
-  //   getUsers();
-  // }, []);
+  function oneclick() {
+    setColor("");
+  }
+
+  function doubleclick(id) {
+    setColor("secondary");
+    console.log("double-clicked", id);
+  }
+
   return (
     <>
       <section className="hero">
@@ -71,13 +73,22 @@ const Users = ({ handleLogout }) => {
                         </div>
                         <hr />
                         <div className="row">
-                          <div className="col-sm-12">
+                          <div className="col-sm-6">
                             <Link
                               className="btn btn-info"
                               to={"/user-details/" + curElem.id}
                             >
                               Details
                             </Link>
+                          </div>
+                          <div className="col-sm-6">
+                            <button
+                              type="button"
+                              onClick={() => oneclick()}
+                              onDoubleClick={() => doubleclick(curElem.id)}
+                            >
+                              <Heart color={color} />
+                            </button>
                           </div>
                         </div>
                       </div>
